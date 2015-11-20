@@ -3,6 +3,7 @@ package objects;
 import java.util.Calendar;
 
 public class Ticket {
+
 	private static int lastTicketNum = 1;
 	private float defaultPrice = 1000;
 	private int ticketNum;
@@ -11,11 +12,13 @@ public class Ticket {
 	private Calendar departDate;
 	private Calendar arrivalDate;
 	private float ticketPrice;
+//	Если уж делать поле с валютой, то делать это правильно через Enum
 	private String currency = "RUR";
 	private TicketStatus ticketStatus;
 	private Person person;
-	
-	
+
+//    как портатип ок. Но в идеале было бы, чтобы тикет не сам себя инициализировал, а былы бы некая фабрика тикетов.
+//    она бы как раз и знала, с каким id, статусом и т.п. создавать объект
 	public int getNewNum() {
 		return ticketNum = lastTicketNum++;
 	}
