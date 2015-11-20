@@ -28,13 +28,13 @@ public class TicketServiceImp {
 	private Ticket initTicket(Person person, String departCity, String arrivalCity, Calendar departDate,
 			Calendar arrivalDate, Calendar birthDate) {
 		Ticket ticket = new Ticket();
-		TicketStatus ticketStatus = TicketStatus.reserve;
+		ticket.setTicketNum(ticket.getNewNum());
 		ticket.setPerson(person);
 		ticket.setDepartCity(departCity);
 		ticket.setArrivalCity(arrivalCity);
 		ticket.setDepartDate(departDate);
 		ticket.setArrivalDate(arrivalDate);
-		ticket.setTicketStatus(ticketStatus.getDescription());
+		ticket.setTicketStatus(TicketStatus.RESERVE);
 		ticket.setTicketPrice(ticket.getDefaultPrice());
 		return ticket;
 	}
@@ -66,14 +66,16 @@ public class TicketServiceImp {
 	@WebMethod
 	public Ticket payTicket(@WebParam(name = "ticketNum") int ticketNum) {
 		Ticket ticket = new Ticket();
-		TicketStatus ticketStatus = TicketStatus.reserve;
 		int ticketsSize = tickets.getTickets().size();
 		for (int i = 0; i < ticketsSize; i++) {
 			if (ticketNum == tickets.getTickets().get(i).getTicketNum()) {
 				ticket = tickets.getTickets().get(i);
+				if (ticket.getTicketStatus().equals(TicketStatus.RESERVE)) {
+					ticket.setTicketStatus(TicketStatus.IS_PAID);
+				}
 			}
 		}
-		ticket.setTicketStatus(ticketStatus.getDescription());
+
 		return ticket;
 	}
 }

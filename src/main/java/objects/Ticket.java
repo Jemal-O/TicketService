@@ -5,15 +5,20 @@ import java.util.Calendar;
 public class Ticket {
 	private static int lastTicketNum = 1;
 	private float defaultPrice = 1000;
-	private int ticketNum = lastTicketNum++;
+	private int ticketNum;
 	private String departCity;
 	private String arrivalCity;
 	private Calendar departDate;
 	private Calendar arrivalDate;
 	private float ticketPrice;
 	private String currency = "RUR";
-	private String ticketStatus;
+	private TicketStatus ticketStatus;
 	private Person person;
+	
+	
+	public int getNewNum() {
+		return ticketNum = lastTicketNum++;
+	}
 
 	public String getCurrency() {
 		return currency;
@@ -32,11 +37,11 @@ public class Ticket {
 		this.person = person;
 	}
 
-	public String getTicketStatus() {
+	public TicketStatus getTicketStatus() {
 		return ticketStatus;
 	}
 
-	public void setTicketStatus(String ticketStatus) {
+	public void setTicketStatus(TicketStatus ticketStatus) {
 		this.ticketStatus = ticketStatus;
 	}
 
