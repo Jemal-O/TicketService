@@ -2,7 +2,7 @@
 <endpoints xmlns="http://java.sun.com/xml/ns/jax-ws/ri/runtime"
 	version="2.0">
 	<endpoint 
-	name="TicketService" 
-	implementation="ws.TicketServiceImp"
-	url-pattern="/TicketService" />
+	name="TicketProcessing" 
+	implementation="ws.TicketProcessing"
+	url-pattern="/tickets" />
 </endpoints>

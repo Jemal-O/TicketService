@@ -1,16 +1,16 @@
 package objects;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.LinkedHashMap;
+import java.util.Map;
 
 public class TicketStorage {
-	private List<Ticket> tickets = new ArrayList<Ticket>();
-
-	public List<Ticket> getTickets() {
+	private Map< Integer ,Ticket> tickets = new LinkedHashMap<Integer, Ticket>();
+	
+	public Map< Integer ,Ticket> getTickets() {
 		return tickets;
 	}
 
-	public void setTickets(List<Ticket> tickets) {
+	public void setTickets(Map< Integer ,Ticket> tickets) {
 		this.tickets = tickets;
 	}
 	

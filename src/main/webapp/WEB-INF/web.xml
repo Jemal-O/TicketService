@@ -9,11 +9,11 @@
 	</listener>
 
 	<servlet>
-		<servlet-name>TicketServiceImp</servlet-name>
+		<servlet-name>TicketProcessing</servlet-name>
 		<servlet-class>com.sun.xml.ws.transport.http.servlet.WSServlet</servlet-class>
 	</servlet>
 	<servlet-mapping>
-		<servlet-name>TicketServiceImp</servlet-name>
-		<url-pattern>/TicketService</url-pattern>
+		<servlet-name>TicketProcessing</servlet-name>
+		<url-pattern>/tickets</url-pattern>
 	</servlet-mapping>
 </web-app>

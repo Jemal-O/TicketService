@@ -3,7 +3,7 @@ package objects;
 import java.util.Calendar;
 
 public class Ticket {
-	private static int lastTicketNum = 1;
+	private int lastTicketNum = 1;
 	private float defaultPrice = 1000;
 	private int ticketNum;
 	private String departCity;
@@ -19,7 +19,7 @@ public class Ticket {
 	public int getNewNum() {
 		return ticketNum = lastTicketNum++;
 	}
-
+	
 	public String getCurrency() {
 		return currency;
 	}
