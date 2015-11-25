@@ -1,9 +1,6 @@
 package objects;
 
 import java.util.Calendar;
-
-import javax.jws.WebParam;
-
 public class DataTransfer {
 	
 	private String name;

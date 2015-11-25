@@ -1,7 +1,5 @@
 package exception;
 
-public class NotTicketFoundException extends Exception {
-	
-	
+public class NotTicketFoundException extends Exception {	
 
 }
