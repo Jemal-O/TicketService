@@ -23,12 +23,14 @@ public class TicketProcessing {
 	// интерфейс сервисов
 	@WebMethod
 	public int reserveTicket(@WebParam(name = "dataTransfer") DataTransfer dataTransfer) {
+//		это должен быть полем метода, чтобы не создавать объект каждый раз
 		TicketCreation ticketCreation = new TicketCreation();
 		Person person = new Person(dataTransfer.getName(), dataTransfer.getLastName(), dataTransfer.getPatronymicName(),
 				dataTransfer.getBirthDate());
 		Ticket ticket = ticketCreation.initTicket(person, dataTransfer.getDepartCity(), dataTransfer.getArrivalCity(),
 				dataTransfer.getDepartDate(), dataTransfer.getArrivalDate(), dataTransfer.getBirthDate());
 		tickets.getTickets().put(ticket.getTicketNum(), ticket);
+//		судя по коду клиента, этот метод должен возвращать номер билета. А тут 1
 		return 1;
 	}
 

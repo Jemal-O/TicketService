@@ -10,6 +10,7 @@ public class TicketCreation {
 			Calendar arrivalDate, Calendar birthDate) {
 		Ticket ticket = new Ticket();
 		Price price = new Price(defaultPrice, Currency.RUR);
+//		всегда один и тот же номер?
 		ticket.setTicketNum(lastTicketNum);
 		ticket.setPerson(person);
 		ticket.setDepartCity(departCity);
