@@ -9,7 +9,7 @@ public class TicketCreation {
 	public Ticket initTicket(Person person, String departCity, String arrivalCity, Calendar departDate,
 			Calendar arrivalDate, Calendar birthDate) {
 		Ticket ticket = new Ticket();
-		Price price = new Price(defaultPrice,Currency.RUR);
+		Price price = new Price(defaultPrice, Currency.RUR);
 		ticket.setTicketNum(lastTicketNum);
 		ticket.setPerson(person);
 		ticket.setDepartCity(departCity);
@@ -20,5 +20,5 @@ public class TicketCreation {
 		ticket.setPrice(price);
 		return ticket;
 	}
-	
+
 }

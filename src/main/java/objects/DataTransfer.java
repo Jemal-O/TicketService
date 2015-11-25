@@ -1,8 +1,9 @@
 package objects;
 
 import java.util.Calendar;
+
 public class DataTransfer {
-	
+
 	private String name;
 	private String lastName;
 	private String patronymicName;

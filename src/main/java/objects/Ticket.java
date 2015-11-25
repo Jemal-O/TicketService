@@ -10,14 +10,14 @@ public class Ticket {
 	private Calendar departDate;
 	private Calendar arrivalDate;
 	private Price price;
-//	Если уж делать поле с валютой, то делать это правильно через Enum
+	// Если уж делать поле с валютой, то делать это правильно через Enum
 	private TicketStatus ticketStatus;
 	private Person person;
 
-//  как портатип ок. Но в идеале было бы, чтобы тикет не сам себя инициализировал, а былы бы некая фабрика тикетов.
-//  она бы как раз и знала, с каким id, статусом и т.п. создавать объект
-	
-	
+	// как портатип ок. Но в идеале было бы, чтобы тикет не сам себя
+	// инициализировал, а былы бы некая фабрика тикетов.
+	// она бы как раз и знала, с каким id, статусом и т.п. создавать объект
+
 	public Price getPrice() {
 		return price;
 	}
@@ -25,11 +25,10 @@ public class Ticket {
 	public void setPrice(Price price) {
 		this.price = price;
 	}
-	
+
 	public Calendar getArrivalDate() {
 		return arrivalDate;
 	}
-
 
 	public Person getPerson() {
 		return person;
