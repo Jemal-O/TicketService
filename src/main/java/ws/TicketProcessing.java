@@ -15,7 +15,8 @@ public class TicketProcessing {
 	// потокобезопасны. При текущей реализации TicketStorage будет
 	// использоваться всеми потоками одновременно. Так что придется озаботиться
 	// о его синхронизации.
-	private TicketStorage tickets = new TicketStorage();
+	private Storage tickets = new TicketStorage();
+	private TicketCreation ticketCreation = new TicketCreation();
 
 	// Эту кучу параметров можно запихнуть в один transfer object и передвавать
 	// его
@@ -24,14 +25,14 @@ public class TicketProcessing {
 	@WebMethod
 	public int reserveTicket(@WebParam(name = "dataTransfer") DataTransfer dataTransfer) {
 //		это должен быть полем метода, чтобы не создавать объект каждый раз
-		TicketCreation ticketCreation = new TicketCreation();
+		
 		Person person = new Person(dataTransfer.getName(), dataTransfer.getLastName(), dataTransfer.getPatronymicName(),
 				dataTransfer.getBirthDate());
 		Ticket ticket = ticketCreation.initTicket(person, dataTransfer.getDepartCity(), dataTransfer.getArrivalCity(),
 				dataTransfer.getDepartDate(), dataTransfer.getArrivalDate(), dataTransfer.getBirthDate());
-		tickets.getTickets().put(ticket.getTicketNum(), ticket);
+		tickets.setTicket(ticket);
 //		судя по коду клиента, этот метод должен возвращать номер билета. А тут 1
-		return 1;
+		return ticket.getTicketNum();
 	}
 
 	// грамотнее было бы венести такую инициализацю тикета в отдельный сервис
@@ -41,19 +42,19 @@ public class TicketProcessing {
 		// из хранилища
 		// это должно выглядеть так: ticketsServie.get(ticketNum) и он либо
 		// возвращает билет, либо ошибку
-		if (tickets.getTickets().get(ticketNum) == null) {
+		if (tickets.getTicket(ticketNum) == null) {
 			throw new NotTicketFoundException();
 		}
 		// нет проверки, что билета с таким номером может не быть
-		return tickets.getTickets().get(ticketNum);
+		return tickets.getTicket(ticketNum);
 	}
 
 	@WebMethod
 	// аналогично предыдцщему замечанию. Не стоит раскрывать реализацию твоего
 	// TicketStorage
 	public boolean returnTicket(@WebParam(name = "ticketNum") int ticketNum) {
-		if (tickets.getTickets().get(ticketNum) != null) {
-			tickets.getTickets().remove(ticketNum);
+		if (tickets.getTicket(ticketNum) != null) {
+			tickets.removeTicket(ticketNum);
 			return true;
 		}
 		return false;
@@ -63,19 +64,19 @@ public class TicketProcessing {
 	public Ticket payTicket(@WebParam(name = "ticketNum") int ticketNum)
 			throws IsPaidException, NotTicketFoundException {
 		// тут все те же самые замечания
-		if (tickets.getTickets().get(ticketNum) != null) {
+		if (tickets.getTicket(ticketNum) != null) {
 			// enum сравнивается без equals
 			// опять же нет никаких проверок есть ли такой билет, оплачен ли он
 			// уже
 
-			if (tickets.getTickets().get(ticketNum).getTicketStatus() != TicketStatus.IS_PAID) {
-				tickets.getTickets().get(ticketNum).setTicketStatus(TicketStatus.IS_PAID);
+			if (tickets.getTicket(ticketNum).getTicketStatus() != TicketStatus.IS_PAID) {
+				tickets.getTicket(ticketNum).setTicketStatus(TicketStatus.IS_PAID);
 			} else {
 				throw new IsPaidException();
 			}
 		} else {
 			throw new NotTicketFoundException();
 		}
-		return tickets.getTickets().get(ticketNum);
+		return tickets.getTicket(ticketNum);
 	}
 }

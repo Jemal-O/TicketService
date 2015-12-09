@@ -1,19 +1,23 @@
 package objects;
 
-import java.util.LinkedHashMap;
+import java.util.HashMap;
 import java.util.Map;
 
-public class TicketStorage {
-//	почему Linked ?
-	private Map<Integer, Ticket> tickets = new LinkedHashMap<Integer, Ticket>();
+public class TicketStorage implements Storage {
+    // почему Linked ?
+    private Map<Integer, Ticket> tickets = new HashMap<Integer, Ticket>();
 
-//	класс все еще расскрывает свою реализацию
-	public Map<Integer, Ticket> getTickets() {
-		return tickets;
-	}
+    // класс все еще расскрывает свою реализацию
+    public Ticket getTicket(int ticketId) {
+        return tickets.get(ticketId);
+    }
 
-	public void setTickets(Map<Integer, Ticket> tickets) {
-		this.tickets = tickets;
-	}
+    public void setTicket(Ticket ticket) {
+        tickets.put(ticket.getTicketNum(), ticket);
+    }
+
+    public void removeTicket(int ticketId) {
+        tickets.remove(ticketId);
+    }
 
 }
